@@ -60,7 +60,19 @@ return require('packer').startup(function(use)
         require("toggleterm").setup()
     end}
     use { "catppuccin/nvim", as = "catppuccin" }
-
+    use { "preservim/tagbar" }
+    use { "akinsho/bufferline.nvim", requires = 'nvim-tree/nvim-web-devicons' }
+    use {
+        "utilyre/barbecue.nvim",
+        tag = "*",
+        requires = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons", -- optional dependency
+        },
+        config = function()
+            require("barbecue").setup()
+        end,
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
