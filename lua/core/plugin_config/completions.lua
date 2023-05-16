@@ -22,3 +22,48 @@ cmp.setup({
     { name = 'buffer' },
   }),
 })
+local ls = require "luasnip"
+local snip = ls.snippet
+local node = ls.snippet_node
+local text = ls.text_node
+local insert = ls.insert_node
+local func = ls.function_node
+local choice = ls.choice_node
+local dynamicn = ls.dynamic_node
+
+
+ls.add_snippets(nil, {
+    all = {
+        snip({
+            trig = "cmakecpp",
+            namr = "cmakecpp",
+            dscr = "cmake boiler for cpp",
+        }, {
+            text {"cmake_minimum_required(VERSION 3.10)",
+                    "set(CMAKE_CXX_STANDARD 17)",
+                    "set(CMAKE_CXX_STANDARD_REQUIRED ON)",
+                    "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)",
+                    "# add_library(LIB_NAME STATIC LIB_DIR)",
+                    "# target_include_directories(LIB_NAME PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/LIB_DIR)",
+                    "",
+                    "project(PROJECT VERSION 1.0)",
+                    "add_executable(PROJECT_OUTPUT SRC//)",
+                    "# target_include_directories(PROJECT_OUTPUT PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)",
+                    "# target_include_libraries(PROJECT PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/LIB_DIR)"},
+            insert(0),
+        }),
+        snip({
+            trig = "cmakec",
+            namr = "cmakec",
+            dscr = "cmake boiler for c",
+        }, {
+            text {"cmake_minimum_required(VERSION 3.10)",
+                    "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)",
+                    "",
+                    "project(PROJECT C)",
+                    "add_executable(PROJECT_OUTPUT SRC//)",
+                    "target_include_directories(PROJECT_OUTPUT PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)"},
+            insert(0),
+        }),
+    },
+})

@@ -73,6 +73,7 @@ return require('packer').startup(function(use)
             require("barbecue").setup()
         end,
     }
+    use { "Shatur/neovim-tasks" }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
