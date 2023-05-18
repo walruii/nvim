@@ -17,10 +17,14 @@ return require('packer').startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-treesitter/nvim-treesitter'
+    use { "preservim/tagbar" }
+    use { "akinsho/bufferline.nvim", requires = 'nvim-tree/nvim-web-devicons' }
     use 'lewis6991/gitsigns.nvim'
     use 'tpope/vim-fugitive'
+
+    -- DAP
     use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use 'rcarriga/nvim-dap-ui'
 
     -- completion
 
@@ -30,7 +34,8 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use "rafamadriz/friendly-snippets"
     use 'onsails/lspkind-nvim'
-    -- use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-buffer'
+
     use({
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -38,11 +43,10 @@ return require('packer').startup(function(use)
         end,
         requires = { "nvim-lua/plenary.nvim" },
     })
-    use 'MunifTanjim/prettier.nvim'
-    --use "github/copilot.vim"
 
     use {
         "williamboman/mason.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
         "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
         "glepnir/lspsaga.nvim",
@@ -54,14 +58,12 @@ return require('packer').startup(function(use)
         requires = { {'nvim-lua/plenary.nvim'} }
     }
 
-    use "jiangmiao/auto-pairs"
+    use 'jiangmiao/auto-pairs'
     use 'tpope/vim-commentary' -- for commenting
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end}
     use { "catppuccin/nvim", as = "catppuccin" }
-    use { "preservim/tagbar" }
-    use { "akinsho/bufferline.nvim", requires = 'nvim-tree/nvim-web-devicons' }
     use {
         "utilyre/barbecue.nvim",
         tag = "*",
@@ -73,7 +75,6 @@ return require('packer').startup(function(use)
             require("barbecue").setup()
         end,
     }
-    use { "Shatur/neovim-tasks" }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
