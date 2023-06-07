@@ -21,6 +21,7 @@ return require('packer').startup(function(use)
     use { "akinsho/bufferline.nvim", requires = 'nvim-tree/nvim-web-devicons' }
     use 'lewis6991/gitsigns.nvim'
     use 'tpope/vim-fugitive'
+    use 'christoomey/vim-tmux-navigator'
 
     -- DAP
     use 'mfussenegger/nvim-dap'
