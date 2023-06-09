@@ -3,7 +3,7 @@ require('lualine').setup {
     icons_enabled = true,
   },
   sections = {
-    lualine_a = {
+    lualine_c = {
       {
         'filename',
         path = 1,
