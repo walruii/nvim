@@ -45,6 +45,7 @@ return require('packer').startup(function(use)
         end,
     }
     use 'brenoprata10/nvim-highlight-colors'
+    use "iamcco/markdown-preview.nvim"
 
     -- completion
 
