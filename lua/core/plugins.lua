@@ -24,17 +24,33 @@ return require('packer').startup(function(use)
     use 'christoomey/vim-tmux-navigator'
     use 'tpope/vim-surround'
     use 'windwp/nvim-ts-autotag'
+    use {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.0',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
 
-    -- DAP
-    use 'mfussenegger/nvim-dap'
-    use 'rcarriga/nvim-dap-ui'
-    use 'rcarriga/cmp-dap'
+    use 'jiangmiao/auto-pairs'
+    use 'tpope/vim-commentary' -- for commenting
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use {
+        "utilyre/barbecue.nvim",
+        tag = "*",
+        requires = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons", -- optional dependency
+        },
+        config = function()
+            require("barbecue").setup()
+        end,
+    }
+    use 'brenoprata10/nvim-highlight-colors'
 
     -- completion
 
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
-    use 'L3MON4D3/LuaSnip'
+    use { "L3MON4D3/LuaSnip", run = "make install_jsregexp", }
     use 'saadparwaiz1/cmp_luasnip'
     use "rafamadriz/friendly-snippets"
     use 'onsails/lspkind-nvim'
@@ -56,33 +72,7 @@ return require('packer').startup(function(use)
         "glepnir/lspsaga.nvim",
     }
 
-    use {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.0',
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
 
-    use 'jiangmiao/auto-pairs'
-    use 'tpope/vim-commentary' -- for commenting
-    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup()
-    end}
-    use { "catppuccin/nvim", as = "catppuccin" }
-    use {
-        "utilyre/barbecue.nvim",
-        tag = "*",
-        requires = {
-            "SmiteshP/nvim-navic",
-            "nvim-tree/nvim-web-devicons", -- optional dependency
-        },
-        config = function()
-            require("barbecue").setup()
-        end,
-    }
-    use 'brenoprata10/nvim-highlight-colors'
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
     if packer_bootstrap then
         require('packer').sync()
     end

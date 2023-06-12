@@ -1,8 +1,5 @@
+DAP
+learn fugitive (learn git)
+learn surround
 
-1. DONE  barbaque ??
-2. DONE fix the autocomplete
-3. DAP
-
-
-()hello
 
