@@ -29,10 +29,12 @@ return require('packer').startup(function(use)
         tag = '0.1.0',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
+    use 'nvim-telescope/telescope-media-files.nvim'
 
     use 'jiangmiao/auto-pairs'
     use 'tpope/vim-commentary' -- for commenting
     use { "catppuccin/nvim", as = "catppuccin" }
+
     use {
         "utilyre/barbecue.nvim",
         tag = "*",
@@ -46,6 +48,8 @@ return require('packer').startup(function(use)
     }
     use 'brenoprata10/nvim-highlight-colors'
     use "iamcco/markdown-preview.nvim"
+    use 'subnut/nvim-ghost.nvim'
+    use 'lukas-reineke/indent-blankline.nvim'
 
     -- completion
 

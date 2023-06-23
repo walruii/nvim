@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+vim.keymap.set('n', '<leader>m', ':nohlsearch<CR>')
 vim.keymap.set('n', '<F8>', ':!gcc % -o %<<CR>')
 vim.keymap.set('n', '<F9>', ':!g++ % -o %<<CR>')
 vim.keymap.set('n', 'Q', '<nop>')
