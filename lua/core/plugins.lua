@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
     use 'christoomey/vim-tmux-navigator'
     use 'tpope/vim-surround'
     use 'windwp/nvim-ts-autotag'
+    use "iamcco/markdown-preview.nvim"
     use {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.0',
@@ -33,7 +34,8 @@ return require('packer').startup(function(use)
 
     use 'jiangmiao/auto-pairs'
     use 'tpope/vim-commentary' -- for commenting
-    use { "catppuccin/nvim", as = "catppuccin" }
+    -- use { "catppuccin/nvim", as = "catppuccin" }
+    use 'Mofiqul/vscode.nvim'
 
     use {
         "utilyre/barbecue.nvim",
@@ -47,7 +49,6 @@ return require('packer').startup(function(use)
         end,
     }
     use 'brenoprata10/nvim-highlight-colors'
-    use "iamcco/markdown-preview.nvim"
     use 'subnut/nvim-ghost.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
 

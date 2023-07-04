@@ -14,7 +14,8 @@ vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", {})
 -- Buffer line
 vim.keymap.set("n", "<leader>h", ":BufferLineCyclePrev<CR>", {})
 vim.keymap.set("n", "<leader>l", ":BufferLineCycleNext<CR>", {})
-vim.keymap.set("n", "<leader>H", ":BufferLineCloseLeft<CR>", {})
-vim.keymap.set("n", "<leader>L", ":BufferLineCloseRight<CR>", {})
+-- vim.keymap.set("n", "<leader>H", ":BufferLineCloseLeft<CR>", {})
+-- vim.keymap.set("n", "<leader>L", ":BufferLineCloseRight<CR>", {})
 vim.keymap.set("n", "<leader>x", ":BufferLinePickClose<CR>", {})
 
+vim.keymap.set("n", "<leader>H", ":nohl<CR>")

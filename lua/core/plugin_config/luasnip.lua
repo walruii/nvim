@@ -48,5 +48,16 @@ ls.add_snippets(nil, {
                     "# target_link_libraries(main PUBLIC lib)"},
             insert(0),
         }),
+        snip({
+            trig = "node-brow",
+            namr = "nodemon and browser-sync",
+            dscr = "nodemon and browser-sync script",
+        }, {
+            text {"\"start\": \"node server.js\",",
+        "\"dev\": \"nodemon server.js\",",
+        "\"ui\": \"browser-sync start --proxy localhost:8000 --files=**/*  --ignore=node_modules --reload-delay 1000 --no-ui --no-inject-changes --no-open\"",
+    },
+            insert(0),
+        }),
     },
 })

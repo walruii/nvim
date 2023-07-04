@@ -3,7 +3,7 @@ require("mason-nvim-dap").setup({
     ensure_installed = { "python", "c" }
 })
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "clangd", "cssls", "html", "tsserver", "cmake", "neocmake"}
+    ensure_installed = { "lua_ls", "clangd", "cssls", "html" }
 })
 
 require("lspconfig").lua_ls.setup {}
@@ -23,6 +23,10 @@ require'lspconfig'.html.setup {
   capabilities = capabilities,
 }
 
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{
+  handlers = {
+    ['textDocument/publishDiagnostics'] = function() end,
+  },
+}
 
-require'lspconfig'.neocmake.setup{}
+-- require'lspconfig'.neocmake.setup{}
