@@ -17,10 +17,8 @@ return require('packer').startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-treesitter/nvim-treesitter'
-    use { "preservim/tagbar" }
     use { "akinsho/bufferline.nvim", requires = 'nvim-tree/nvim-web-devicons' }
     use 'lewis6991/gitsigns.nvim'
-    use 'tpope/vim-fugitive'
     use 'christoomey/vim-tmux-navigator'
     use 'tpope/vim-surround'
     use 'windwp/nvim-ts-autotag'
@@ -34,7 +32,6 @@ return require('packer').startup(function(use)
 
     use 'jiangmiao/auto-pairs'
     use 'tpope/vim-commentary' -- for commenting
-    -- use { "catppuccin/nvim", as = "catppuccin" }
     use 'Mofiqul/vscode.nvim'
 
     use {
@@ -49,7 +46,7 @@ return require('packer').startup(function(use)
         end,
     }
     use 'brenoprata10/nvim-highlight-colors'
-    use 'subnut/nvim-ghost.nvim'
+    -- use 'subnut/nvim-ghost.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
 
     -- completion
