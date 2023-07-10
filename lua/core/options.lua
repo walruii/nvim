@@ -21,4 +21,5 @@ vim.cmd [[ set noswapfile ]]
 vim.wo.number = true
 vim.opt.relativenumber = true
 
-vim.opt.ignorecase = true 
+vim.opt.ignorecase = true
+vim.opt.guicursor = ""
