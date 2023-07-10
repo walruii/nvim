@@ -1,4 +1,3 @@
-vim.keymap.set('n', '<leader>m', ':nohlsearch<CR>')
 vim.keymap.set('n', '<F8>', ':!gcc % -o %<<CR>')
 vim.keymap.set('n', '<F9>', ':!g++ % -o %<<CR>')
 vim.keymap.set('n', 'Q', '<nop>')
@@ -11,11 +10,15 @@ vim.keymap.set("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", {})
 vim.keymap.set("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", {})
 vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", {})
 
+-- Move the pages
+vim.keymap.set("n", "J", "<C-d>")
+vim.keymap.set("n", "K", "<C-u>")
+
 -- Buffer line
-vim.keymap.set("n", "<leader>h", ":BufferLineCyclePrev<CR>", {})
-vim.keymap.set("n", "<leader>l", ":BufferLineCycleNext<CR>", {})
+-- vim.keymap.set("n", "<leader>h", ":BufferLineCyclePrev<CR>", {})
+-- vim.keymap.set("n", "<leader>l", ":BufferLineCycleNext<CR>", {})
 -- vim.keymap.set("n", "<leader>H", ":BufferLineCloseLeft<CR>", {})
 -- vim.keymap.set("n", "<leader>L", ":BufferLineCloseRight<CR>", {})
-vim.keymap.set("n", "<leader>x", ":BufferLinePickClose<CR>", {})
+-- vim.keymap.set("n", "<leader>x", ":BufferLinePickClose<CR>", {})
 
-vim.keymap.set("n", "<leader>H", ":nohl<CR>")
+vim.keymap.set("n", "<leader>h", ":nohl<CR>", {silent = true})
