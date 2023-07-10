@@ -20,13 +20,19 @@ require'lspconfig'.cssls.setup {
 }
 
 require'lspconfig'.html.setup {
-  capabilities = capabilities,
+    capabilities = capabilities,
 }
 
-require'lspconfig'.tsserver.setup{
-  handlers = {
-    ['textDocument/publishDiagnostics'] = function() end,
-  },
-}
+require"lspconfig".tsserver.setup({})
+
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        virtual_text = {
+            spacing = 5,
+            severity_limit = 'Warning',
+        },
+    }
+)
 
 -- require'lspconfig'.neocmake.setup{}
