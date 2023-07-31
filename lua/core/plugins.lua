@@ -17,7 +17,6 @@ return require('packer').startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-treesitter/nvim-treesitter'
-    -- use { "akinsho/bufferline.nvim", requires = 'nvim-tree/nvim-web-devicons' }
     use 'lewis6991/gitsigns.nvim'
     use 'christoomey/vim-tmux-navigator'
     use 'tpope/vim-surround'
@@ -28,11 +27,11 @@ return require('packer').startup(function(use)
         tag = '0.1.0',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
-    use 'nvim-telescope/telescope-media-files.nvim'
 
     use 'jiangmiao/auto-pairs'
     use 'tpope/vim-commentary' -- for commenting
     use 'Mofiqul/vscode.nvim'
+    use 'lifepillar/vim-gruvbox8/'
 
     use {
         "utilyre/barbecue.nvim",
@@ -46,9 +45,12 @@ return require('packer').startup(function(use)
         end,
     }
     use 'brenoprata10/nvim-highlight-colors'
-    -- use 'subnut/nvim-ghost.nvim'
+    use 'subnut/nvim-ghost.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
+
+    -- vim Xprence
     use 'ThePrimeagen/vim-be-good'
+    use 'takac/vim-hardtime'
 
     -- completion
 

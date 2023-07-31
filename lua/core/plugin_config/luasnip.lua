@@ -59,22 +59,29 @@ ls.add_snippets(nil, {
             dscr = "nodemon and browser-sync script",
         }, {
             text {"\"start\": \"node "},
-            insert(0, "server"),
+            insert(0, "app"),
             text{".js\",",
             "\"dev\": \"nodemon "},
-            insert(1, "server"),
+            insert(1, "app"),
             text{".js\",",
             "\"ui\": \"browser-sync start --proxy localhost:8000 --files=**/*  --ignore=node_modules --reload-delay 1000 --no-ui --no-inject-changes --no-open\"",
         },
     }),
     snip({
-        trig = "p",
+        trig = "e",
         namr = "ejs brac",
         dscr = "ejs brackets",
     }, {
         text {"<%"},
         insert(0),
         text{" %>"},
+    }),
+    snip({
+        trig = "inderjap",
+        namr = "Inder in japanese",
+        dscr = "'Inder' in japanese because it looks cool yk what i mean",
+    }, {
+        text{"インダー"},
     }),
 },
 })

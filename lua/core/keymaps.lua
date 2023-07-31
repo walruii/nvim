@@ -1,8 +1,10 @@
 vim.keymap.set('n', '<F8>', ':!gcc % -o %<<CR>')
-vim.keymap.set('n', '<F9>', ':!g++ % -o %<<CR>')
+vim.keymap.set('n', '\\', ':!g++ % -o %<<CR>')
 vim.keymap.set('n', 'Q', '<nop>')
+vim.keymap.set('n', '<space>p', '<nop>')
 vim.keymap.set('n', 'q:', '<Nop>')
 -- vim.keymap.set('t', '<C-w>', "<C-\\><C-n><C-w>h",{silent = true})
+
 
 -- move between windows
 vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", {})
@@ -22,3 +24,6 @@ vim.keymap.set("n", "K", "<C-u>")
 -- vim.keymap.set("n", "<leader>x", ":BufferLinePickClose<CR>", {})
 
 vim.keymap.set("n", "<leader>h", ":nohl<CR>", {silent = true})
+vim.keymap.set("n", "<leader>y", "\"*y")
+vim.keymap.set("v", "<leader>y", "\"*y")
+vim.keymap.set("n", "<leader>p", "\"*p")
