@@ -3,8 +3,6 @@ vim.keymap.set('n', '\\', ':!g++ % -o %<<CR>')
 vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<space>p', '<nop>')
 vim.keymap.set('n', 'q:', '<Nop>')
--- vim.keymap.set('t', '<C-w>', "<C-\\><C-n><C-w>h",{silent = true})
-
 
 -- move between windows
 vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", {})

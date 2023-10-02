@@ -1,10 +1,3 @@
--- require('telescope').setup {
---     defaults = {
---         file_ignore_patterns = {
---             "node_modules"
---         }
---     }
--- }
 require('telescope').setup()
 local builtin = require('telescope.builtin')
 
