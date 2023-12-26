@@ -12,40 +12,30 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim' -- the package manager
-  use 'nvim-tree/nvim-tree.lua' -- the side file manager
-  use 'nvim-tree/nvim-web-devicons' -- the icons
-  use 'nvim-lualine/lualine.nvim' -- the line that shows up at the bottom
+  use 'wbthomason/packer.nvim'          -- the package manager
+  -- use 'nvim-tree/nvim-tree.lua'         -- the side file manager
+  use 'nvim-tree/nvim-web-devicons'     -- the icons
+  use 'nvim-lualine/lualine.nvim'       -- the line that shows up at the bottom
   use 'nvim-treesitter/nvim-treesitter' -- the language support manager with syntax hightlight
-  use 'lewis6991/gitsigns.nvim' -- git signs on the left side
-  use 'christoomey/vim-tmux-navigator' -- tmux itegrations
-  use 'windwp/nvim-ts-autotag' -- HTML autotags
-  use "iamcco/markdown-preview.nvim" -- the MD preview in browser
+  use 'lewis6991/gitsigns.nvim'         -- git signs on the left side
+  use 'christoomey/vim-tmux-navigator'  -- tmux itegrations
+  use 'windwp/nvim-ts-autotag'          -- HTML autotags
   use {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.0',
     requires = { { 'nvim-lua/plenary.nvim' } }
+
+  }
+  use {
+    "nvim-telescope/telescope-file-browser.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   }
 
   use 'tpope/vim-surround'
   use "tpope/vim-repeat"
-  use 'tpope/vim-commentary'   -- for commenting
+  use 'tpope/vim-commentary' -- for commenting
   use 'jiangmiao/auto-pairs'
   use 'Mofiqul/vscode.nvim'
-
-  use {
-    "utilyre/barbecue.nvim",
-    tag = "*",
-    requires = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",       -- optional dependency
-    },
-    config = function()
-      require("barbecue").setup()
-    end,
-  }
   use 'brenoprata10/nvim-highlight-colors'
-  use 'subnut/nvim-ghost.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
 
   -- completion

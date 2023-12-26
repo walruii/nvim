@@ -1,5 +1,15 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+    },
+  },
+}
 lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
 lspconfig.rust_analyzer.setup {
@@ -8,8 +18,8 @@ lspconfig.rust_analyzer.setup {
     ['rust-analyzer'] = {},
   },
 }
-lspconfig.tailwindcss.setup{}
-lspconfig.cssls.setup{}
+lspconfig.tailwindcss.setup {}
+lspconfig.cssls.setup {}
 
 vim.diagnostic.config({
   virtual_text = false,

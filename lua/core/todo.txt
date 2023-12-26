@@ -1,5 +1,0 @@
-DAP
-learn fugitive (learn git)
-learn surround
-
-
