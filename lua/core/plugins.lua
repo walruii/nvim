@@ -13,7 +13,6 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'          -- the package manager
-  -- use 'nvim-tree/nvim-tree.lua'         -- the side file manager
   use 'nvim-tree/nvim-web-devicons'     -- the icons
   use 'nvim-lualine/lualine.nvim'       -- the line that shows up at the bottom
   use 'nvim-treesitter/nvim-treesitter' -- the language support manager with syntax hightlight
@@ -35,6 +34,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-commentary' -- for commenting
   use 'jiangmiao/auto-pairs'
   use 'Mofiqul/vscode.nvim'
+  use "craftzdog/solarized-osaka.nvim"
   use 'brenoprata10/nvim-highlight-colors'
   use 'lukas-reineke/indent-blankline.nvim'
 
@@ -47,14 +47,8 @@ return require('packer').startup(function(use)
   use "rafamadriz/friendly-snippets"
   use 'onsails/lspkind-nvim'
   use 'hrsh7th/cmp-buffer'
+  use 'nvim-tree/nvim-tree.lua'
 
-  use({
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("null-ls").setup()
-    end,
-    requires = { "nvim-lua/plenary.nvim" },
-  })
 
   use {
     "williamboman/mason.nvim",

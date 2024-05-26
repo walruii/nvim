@@ -1,5 +1,5 @@
 vim.keymap.set('n', '<F8>', ':!gcc % -o %<<CR>')
-vim.keymap.set('n', '\\', ':!g++ % -o %<<CR>')
+vim.keymap.set('n', '\\', ':!g++ -std=c++17 % -o %<<CR>')
 vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<space>p', '<nop>')
 vim.keymap.set('n', 'q:', '<Nop>')

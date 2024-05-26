@@ -20,6 +20,7 @@ lspconfig.rust_analyzer.setup {
 }
 lspconfig.tailwindcss.setup {}
 lspconfig.cssls.setup {}
+lspconfig.jdtls.setup {}
 
 vim.diagnostic.config({
   virtual_text = false,
