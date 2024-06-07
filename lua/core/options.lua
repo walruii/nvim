@@ -21,3 +21,4 @@ vim.opt.relativenumber = true
 
 vim.opt.ignorecase = true
 vim.opt.guicursor = ""
+vim.g.hardtime_default_on = true

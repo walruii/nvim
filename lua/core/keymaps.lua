@@ -15,8 +15,12 @@ vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", {})
 vim.keymap.set("n", "J", "<C-d>")
 vim.keymap.set("n", "K", "<C-u>")
 
+-- Split windows
+vim.keymap.set("n", "ss", ":split<CR>")
+vim.keymap.set("n", "sv", ":vsplit<CR>")
+
 -- system clipboard
-vim.keymap.set("n", "<leader>h", ":nohl<CR>", {silent = true})
+vim.keymap.set("n", "<leader>h", ":nohl<CR>", { silent = true })
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>p", "\"+p")

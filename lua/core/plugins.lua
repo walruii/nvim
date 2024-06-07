@@ -38,7 +38,7 @@ return require('packer').startup(function(use)
   use 'brenoprata10/nvim-highlight-colors'
   use 'lukas-reineke/indent-blankline.nvim'
 
-  -- completion 
+  -- completion
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -48,8 +48,8 @@ return require('packer').startup(function(use)
   use 'onsails/lspkind-nvim'
   use 'hrsh7th/cmp-buffer'
   use 'nvim-tree/nvim-tree.lua'
-
-
+  use "https://github.com/aviate-labs/motoko.vim"
+  use "https://github.com/takac/vim-hardtime"
   use {
     "williamboman/mason.nvim",
     "jay-babu/mason-nvim-dap.nvim",
@@ -63,4 +63,3 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
-
