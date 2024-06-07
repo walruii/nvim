@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
 
   }
+  use "https://github.com/diepm/vim-rest-console"
   use {
     "nvim-telescope/telescope-file-browser.nvim",
     requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
@@ -40,14 +41,6 @@ return require('packer').startup(function(use)
       { "nvim-lua/plenary.nvim" },
       { "nvim-treesitter/nvim-treesitter" }
     }
-  }
-  use "https://github.com/vhyrro/luarocks.nvim"
-  use {
-    "rest-nvim/rest.nvim",
-    rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" },
-    config = function()
-      require("rest-nvim").setup()
-    end,
   }
   use 'tpope/vim-surround'
   use "tpope/vim-repeat"
