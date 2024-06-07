@@ -5,7 +5,7 @@ require("mason-nvim-dap").setup({
 require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls", "clangd", "cssls", "html", "tsserver", "grammarly",
-    "jsonls", "cssmodules_ls", "css_variables", "bashls", "jdtls", "motoko_lsp",
+    "jsonls", "cssmodules_ls", "bashls", "jdtls",
     "tailwindcss", "typos_lsp"
   }
 })
@@ -44,7 +44,7 @@ require 'lspconfig'.html.setup {
 
 require 'lspconfig'.tsserver.setup({})
 require 'lspconfig'.tailwindcss.setup({})
-require 'lspconfig'.motoko_lsp.setup({})
+-- require 'lspconfig'.motoko_lsp.setup({})
 require 'lspconfig'.grammarly.setup {}
 require 'lspconfig'.jsonls.setup {}
 require 'lspconfig'.cssmodules_ls.setup {}
