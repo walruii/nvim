@@ -32,7 +32,7 @@ require("lspconfig").lua_ls.setup {
 }
 require("lspconfig").clangd.setup {}
 
--- npm i -g vscode-langservers-extracted
+-- sudo npm install -g vscode-langservers-extracted typescript typescript-language-server @tailwindcss/language-server @ast-grep/cli
 
 require 'lspconfig'.cssls.setup {
   capabilities = capabilities,
