@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'          -- the package manager
   use 'nvim-tree/nvim-web-devicons'     -- the icons
   use 'nvim-lualine/lualine.nvim'       -- the line that shows up at the bottom
-  use 'nvim-treesitter/nvim-treesitter' -- the language support manager with syntax hightlight
+  use 'nvim-treesitter/nvim-treesitter' -- the language support manager with syntax highlight
   use 'lewis6991/gitsigns.nvim'         -- git signs on the left side
   use 'christoomey/vim-tmux-navigator'  -- tmux itegrations
   use 'windwp/nvim-ts-autotag'          -- HTML autotags
@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
 
   }
+
   use {
     "nvim-telescope/telescope-file-browser.nvim",
     requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
@@ -38,7 +39,7 @@ return require('packer').startup(function(use)
   use 'brenoprata10/nvim-highlight-colors'
   use 'lukas-reineke/indent-blankline.nvim'
 
-  -- completion
+  -- completion 
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -63,3 +64,4 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
+

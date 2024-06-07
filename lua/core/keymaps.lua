@@ -1,5 +1,6 @@
 vim.keymap.set('n', '<F8>', ':!gcc % -o %<<CR>')
 vim.keymap.set('n', '\\', ':!g++ -std=c++17 % -o %<<CR>')
+
 vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<space>p', '<nop>')
 vim.keymap.set('n', 'q:', '<Nop>')
@@ -14,7 +15,8 @@ vim.keymap.set("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", {})
 vim.keymap.set("n", "J", "<C-d>")
 vim.keymap.set("n", "K", "<C-u>")
 
+-- system clipboard
 vim.keymap.set("n", "<leader>h", ":nohl<CR>", {silent = true})
-vim.keymap.set("n", "<leader>y", "\"*y")
-vim.keymap.set("v", "<leader>y", "\"*y")
-vim.keymap.set("n", "<leader>p", "\"*p")
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>p", "\"+p")
