@@ -21,4 +21,9 @@ vim.opt.relativenumber = true
 
 vim.opt.ignorecase = true
 vim.opt.guicursor = ""
+
+-- vim hardtime
 vim.g.hardtime_default_on = true
+vim.g.hardtime_allow_different_key = 1
+vim.g.hardtime_maxcount = 3
+vim.g.hardtime_motion_with_count_resets = 1

@@ -24,3 +24,9 @@ vim.keymap.set("n", "<leader>h", ":nohl<CR>", { silent = true })
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>p", "\"+p")
+
+-- rename
+-- vim.keymap.set("n", "<leader>rn", ":IncRename ")
+vim.keymap.set("n", "<leader>rn", function()
+  return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true })
