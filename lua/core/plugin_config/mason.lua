@@ -44,13 +44,13 @@ require 'lspconfig'.html.setup {
 
 require 'lspconfig'.tsserver.setup({})
 require 'lspconfig'.tailwindcss.setup({})
--- require 'lspconfig'.motoko_lsp.setup({})
+require 'lspconfig'.motoko_lsp.setup({})
 require 'lspconfig'.grammarly.setup {}
 require 'lspconfig'.jsonls.setup {}
 require 'lspconfig'.cssmodules_ls.setup {}
 require 'lspconfig'.css_variables.setup {}
 require 'lspconfig'.bashls.setup {}
-require 'lspconfig'.typos_lsp.setup {}
+-- require 'lspconfig'.typos_lsp.setup {}
 require 'lspconfig'.jdtls.setup {}
 
 vim.filetype.add { extension = { mo = 'motoko' } }
