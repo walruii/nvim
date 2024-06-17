@@ -9,6 +9,8 @@ vim.opt.autoread = true
 vim.opt.termguicolors = true
 vim.wo.wrap = false
 
+vim.opt.swapfile = false
+
 -- use spaces for tabs and whatnot
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2

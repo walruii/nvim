@@ -52,6 +52,14 @@ require 'lspconfig'.css_variables.setup {}
 require 'lspconfig'.bashls.setup {}
 -- require 'lspconfig'.typos_lsp.setup {}
 require 'lspconfig'.jdtls.setup {}
+require 'lspconfig'.eslint.setup {
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+}
 
 vim.filetype.add { extension = { mo = 'motoko' } }
 

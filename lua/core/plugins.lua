@@ -25,6 +25,8 @@ return require('packer').startup(function(use)
 
   }
   use "https://github.com/diepm/vim-rest-console"
+  use "stevearc/conform.nvim"
+  use "mfussenegger/nvim-lint"
   use {
     "nvim-telescope/telescope-file-browser.nvim",
     requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
