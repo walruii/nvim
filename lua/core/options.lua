@@ -8,6 +8,7 @@ vim.opt.autowrite = true
 vim.opt.autoread = true
 vim.opt.termguicolors = true
 vim.wo.wrap = false
+vim.o.signcolumn = "yes"
 
 vim.opt.swapfile = false
 
@@ -22,7 +23,7 @@ vim.wo.number = true
 vim.opt.relativenumber = true
 
 vim.opt.ignorecase = true
-vim.opt.guicursor = ""
+vim.o.guicursor = ""
 
 -- vim hardtime
 vim.g.hardtime_default_on = true
