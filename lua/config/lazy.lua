@@ -124,6 +124,25 @@ require("lazy").setup({
 			lazy = false,
 		},
 
+		--- Tmux Navigation
+		{
+			"alexghergh/nvim-tmux-navigation",
+			config = function()
+				local nvim_tmux_nav = require("nvim-tmux-navigation")
+
+				nvim_tmux_nav.setup({
+					disable_when_zoomed = true, -- defaults to false
+				})
+
+				vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+				vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+				vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+				vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+				vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+				vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+			end,
+		},
+
 		--- completion
 		{
 			"hrsh7th/nvim-cmp",
@@ -162,25 +181,6 @@ require("lazy").setup({
 							behavior = cmp.ConfirmBehavior.Replace,
 							select = true,
 						}),
-						["<Tab>"] = cmp.mapping(function(fallback)
-							if cmp.visible() then
-								cmp.select_next_item()
-							elseif luasnip.expand_or_jumpable() then
-								luasnip.expand_or_jump()
-							else
-								fallback()
-							end
-						end, { "i", "s" }),
-
-						["<S-Tab>"] = cmp.mapping(function(fallback)
-							if cmp.visible() then
-								cmp.select_prev_item()
-							elseif luasnip.jumpable(-1) then
-								luasnip.jump(-1)
-							else
-								fallback()
-							end
-						end, { "i", "s" }),
 					}),
 					sources = cmp.config.sources({
 						{ name = "nvim_lsp" },
@@ -378,6 +378,80 @@ require("lazy").setup({
 					-- },
 				})
 			end,
+		},
+
+		--- Copilot
+		{
+			"github/copilot.vim",
+		},
+
+		--- CopilotChat
+		{
+			"CopilotC-Nvim/CopilotChat.nvim",
+			dependencies = {
+				{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+				{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+			},
+			build = "make tiktoken", -- Only on MacOS or Linux
+			opts = {
+				-- See Configuration section for options
+			},
+			keys = {
+				{
+					"<leader>zc",
+					":CopilotChat<CR>",
+					mode = "n",
+					desc = "Chat with Copilot",
+				},
+				{
+					"<leader>ze",
+					":CopilotChatExplain<CR>",
+					mode = "v",
+					desc = "Explain Code",
+				},
+				{
+					"<leader>zr",
+					":CopilotChatReview<CR>",
+					mode = "v",
+					desc = "Review Code",
+				},
+				{
+					"<leader>zf",
+					":CopilotChatFix<CR>",
+					mode = "v",
+					desc = "Fix Code Issues",
+				},
+				{
+					"<leader>zo",
+					":CopilotChatOptimize<CR>",
+					mode = "v",
+					desc = "Optimize Code",
+				},
+				{
+					"<leader>zd",
+					":CopilotChatDocs<CR>",
+					mode = "v",
+					desc = "Generate Docs",
+				},
+				{
+					"<leader>zt",
+					":CopilotChatTests<CR>",
+					mode = "v",
+					desc = "Generate Tests",
+				},
+				{
+					"<leader>zm",
+					":CopilotChatCommit<CR>",
+					mode = "n",
+					desc = "Generate Commit Message",
+				},
+				{
+					"<leader>zs",
+					":CopilotChatCommit<CR>",
+					mode = "v",
+					desc = "Generate Commit for Selection",
+				},
+			},
 		},
 	},
 	-- Configure any other settings here. See the documentation for more details.
