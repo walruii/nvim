@@ -66,6 +66,64 @@ require("lazy").setup({
 			end,
 		},
 
+		--- autotags
+		{
+			"windwp/nvim-ts-autotag",
+			config = function()
+				require("nvim-ts-autotag").setup({})
+			end,
+			lazy = false,
+		},
+
+		--- Treesitter
+		{
+			"https://github.com/nvim-treesitter/nvim-treesitter",
+			config = function()
+				require("nvim-treesitter.configs").setup({
+					-- A list of parser names, or "all" (the listed parsers MUST always be installed)
+					ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+
+					-- Install parsers synchronously (only applied to `ensure_installed`)
+					sync_install = false,
+
+					-- Automatically install missing parsers when entering buffer
+					-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+					auto_install = true,
+
+					-- List of parsers to ignore installing (or "all")
+					ignore_install = { "javascript" },
+
+					---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+					-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+					highlight = {
+						enable = true,
+
+						-- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+						-- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+						-- the name of the parser)
+						-- list of language that will be disabled
+						disable = { "c", "rust" },
+						-- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+						disable = function(lang, buf)
+							local max_filesize = 100 * 1024 -- 100 KB
+							local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+							if ok and stats and stats.size > max_filesize then
+								return true
+							end
+						end,
+
+						-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+						-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+						-- Using this option may slow down your editor, and you may see some duplicate highlights.
+						-- Instead of true it can also be a list of languages
+						additional_vim_regex_highlighting = false,
+					},
+				})
+			end,
+			lazy = false,
+		},
+
 		--- completion
 		{
 			"hrsh7th/nvim-cmp",
@@ -85,7 +143,7 @@ require("lazy").setup({
 			config = function()
 				local cmp = require("cmp")
 				local lspkind = require("lspkind")
-				local luasnip = require("luasnip")
+				local lusnip = require("luasnip")
 
 				require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -104,6 +162,25 @@ require("lazy").setup({
 							behavior = cmp.ConfirmBehavior.Replace,
 							select = true,
 						}),
+						["<Tab>"] = cmp.mapping(function(fallback)
+							if cmp.visible() then
+								cmp.select_next_item()
+							elseif luasnip.expand_or_jumpable() then
+								luasnip.expand_or_jump()
+							else
+								fallback()
+							end
+						end, { "i", "s" }),
+
+						["<S-Tab>"] = cmp.mapping(function(fallback)
+							if cmp.visible() then
+								cmp.select_prev_item()
+							elseif luasnip.jumpable(-1) then
+								luasnip.jump(-1)
+							else
+								fallback()
+							end
+						end, { "i", "s" }),
 					}),
 					sources = cmp.config.sources({
 						{ name = "nvim_lsp" },
@@ -155,6 +232,7 @@ require("lazy").setup({
 			end,
 		},
 
+		--- LSPConfig
 		{
 			"neovim/nvim-lspconfig",
 			event = { "BufReadPre", "BufNewFile" },
@@ -165,16 +243,43 @@ require("lazy").setup({
 				{ "folke/neodev.nvim", opts = {} },
 			},
 			config = function()
-				local nvim_lsp = require("lspconfig")
+				local lspconfig = require("lspconfig")
 				local mason_lspconfig = require("mason-lspconfig")
 
-				local protocol = require("vim.lsp.protocol")
+				local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+				-- Setup diagnostics
+				vim.diagnostic.config({
+					virtual_text = false,
+					signs = true,
+					underline = true,
+					update_in_insert = false,
+					severity_sort = true,
+				})
+
+				-- Global diagnostics keymaps
+				vim.keymap.set("n", "<space>d", vim.diagnostic.open_float)
+				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+				vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+				vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+				-- On attach function for setting up buffer-local keymaps
 				local on_attach = function(client, bufnr)
-					-- format on save
+					vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+					local opts = { buffer = bufnr }
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "<space>k", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
+					vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+
+					-- Format on save
 					if client.server_capabilities.documentFormattingProvider then
 						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = vim.api.nvim_create_augroup("Format", { clear = true }),
+							group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
 							buffer = bufnr,
 							callback = function()
 								vim.lsp.buf.format()
@@ -183,53 +288,11 @@ require("lazy").setup({
 					end
 				end
 
-				local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-				-- 		mason_lspconfig.setup_handlers({
-				-- 			function(server)
-				-- 				nvim_lsp[server].setup({
-				-- 					capabilities = capabilities,
-				-- 				})
-				-- 			end,
-				-- 			["cssls"] = function()
-				-- 				nvim_lsp["cssls"].setup({
-				-- 					on_attach = on_attach,
-				-- 					capabilities = capabilities,
-				-- 				})
-				-- 			end,
-				-- 			["tailwindcss"] = function()
-				-- 				nvim_lsp["tailwindcss"].setup({
-				-- 					on_attach = on_attach,
-				-- 					capabilities = capabilities,
-				-- 				})
-				-- 			end,
-				-- 			["html"] = function()
-				-- 				nvim_lsp["html"].setup({
-				-- 					on_attach = on_attach,
-				-- 					capabilities = capabilities,
-				-- 				})
-				-- 			end,
-				-- 			["jsonls"] = function()
-				-- 				nvim_lsp["jsonls"].setup({
-				-- 					on_attach = on_attach,
-				-- 					capabilities = capabilities,
-				-- 				})
-				-- 			end,
-				-- 			["eslint"] = function()
-				-- 				nvim_lsp["eslint"].setup({
-				-- 					on_attach = on_attach,
-				-- 					capabilities = capabilities,
-				-- 				})
-				-- 			end,
-				-- 			["pyright"] = function()
-				-- 				nvim_lsp["pyright"].setup({
-				-- 					on_attach = on_attach,
-				-- 					capabilities = capabilities,
-				-- 				})
-				-- 			end,
-				-- 		})
+				mason_lspconfig.setup()
 			end,
 		},
+
+		--- formatter
 		{
 			"stevearc/conform.nvim",
 			event = { "BufReadPre", "BufNewFile" },
@@ -267,6 +330,7 @@ require("lazy").setup({
 			end,
 		},
 
+		--- gitsigns
 		{
 			"lewis6991/gitsigns.nvim",
 			config = function()
