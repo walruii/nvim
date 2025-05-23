@@ -67,7 +67,7 @@ return require('packer').startup(function(use)
   use "https://github.com/takac/vim-hardtime"
   use {
     "williamboman/mason.nvim",
-    "jay-babu/mason-nvim-dap.nvim",
+    -- "jay-babu/mason-nvim-dap.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "glepnir/lspsaga.nvim",

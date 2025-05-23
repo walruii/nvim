@@ -1,10 +1,10 @@
 require("mason").setup()
-require("mason-nvim-dap").setup({
-  ensure_installed = { "python", "c" }
-})
+-- require("mason-nvim-dap").setup({
+--   ensure_installed = { "python", "c" }
+-- })
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "lua_ls", "clangd", "cssls", "html", "tsserver", "grammarly",
+    "lua_ls", "clangd", "cssls", "html", "grammarly",
     "jsonls", "cssmodules_ls", "bashls", "jdtls",
     "tailwindcss"
   }
@@ -42,7 +42,6 @@ require 'lspconfig'.html.setup {
   capabilities = capabilities,
 }
 
-require 'lspconfig'.tsserver.setup({})
 require 'lspconfig'.tailwindcss.setup({})
 -- require 'lspconfig'.motoko_lsp.setup({})
 require 'lspconfig'.grammarly.setup {}
