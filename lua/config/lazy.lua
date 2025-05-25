@@ -1,4 +1,3 @@
--- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -14,33 +13,23 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	end
 end
 vim.opt.rtp:prepend(lazypath)
-
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
 		--- File Explorer
 		{
 			"stevearc/oil.nvim",
-			---@module 'oil'
-			---@type oil.SetupOpts
+			-- lazy = false,
 			opts = {},
-			-- Optional dependencies
 			dependencies = { { "echasnovski/mini.icons", opts = {} } },
-			-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-			-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-			lazy = false,
 		},
 
 		--- THEME
 		{
 			"tiagovla/tokyodark.nvim",
-			lazy = false,
+			-- lazy = false,
 			priority = 1000,
 			config = function()
 				vim.cmd("colorscheme tokyodark")
@@ -69,59 +58,10 @@ require("lazy").setup({
 		--- autotags
 		{
 			"windwp/nvim-ts-autotag",
+			-- lazy = false,
 			config = function()
 				require("nvim-ts-autotag").setup({})
 			end,
-			lazy = false,
-		},
-
-		--- Treesitter
-		{
-			"https://github.com/nvim-treesitter/nvim-treesitter",
-			config = function()
-				require("nvim-treesitter.configs").setup({
-					-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-					ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-
-					-- Install parsers synchronously (only applied to `ensure_installed`)
-					sync_install = false,
-
-					-- Automatically install missing parsers when entering buffer
-					-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-					auto_install = true,
-
-					-- List of parsers to ignore installing (or "all")
-					ignore_install = { "javascript" },
-
-					---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-					-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-					highlight = {
-						enable = true,
-
-						-- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-						-- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-						-- the name of the parser)
-						-- list of language that will be disabled
-						disable = { "c", "rust" },
-						-- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-						disable = function(lang, buf)
-							local max_filesize = 100 * 1024 -- 100 KB
-							local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-							if ok and stats and stats.size > max_filesize then
-								return true
-							end
-						end,
-
-						-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-						-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-						-- Using this option may slow down your editor, and you may see some duplicate highlights.
-						-- Instead of true it can also be a list of languages
-						additional_vim_regex_highlighting = false,
-					},
-				})
-			end,
-			lazy = false,
 		},
 
 		--- Tmux Navigation
@@ -129,11 +69,9 @@ require("lazy").setup({
 			"alexghergh/nvim-tmux-navigation",
 			config = function()
 				local nvim_tmux_nav = require("nvim-tmux-navigation")
-
 				nvim_tmux_nav.setup({
 					disable_when_zoomed = true, -- defaults to false
 				})
-
 				vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
 				vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
 				vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
@@ -143,6 +81,46 @@ require("lazy").setup({
 			end,
 		},
 
+		--- Treesitter
+		{
+			"https://github.com/nvim-treesitter/nvim-treesitter",
+			-- lazy = false,
+			config = function()
+				require("nvim-treesitter.configs").setup({
+					ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+					sync_install = false,
+					auto_install = true,
+					highlight = {
+						enable = true,
+						additional_vim_regex_highlighting = false,
+					},
+				})
+			end,
+		},
+
+		--- Telescope
+		{
+			"nvim-telescope/telescope.nvim",
+			tag = "0.1.8",
+			dependencies = { "nvim-lua/plenary.nvim" },
+			-- lazy = false,
+			config = function()
+				local builtin = require("telescope.builtin")
+				vim.keymap.set("n", "<leader>o", function()
+					require("telescope.builtin").find_files({ cwd = vim.loop.cwd() })
+				end, { desc = "Telescope find files (CWD)" })
+				vim.keymap.set("n", "<leader>o", builtin.find_files, { desc = "Telescope find files" })
+				vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+				vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+				vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+			end,
+		},
+
+		---- Mason
+		{
+			"mason-org/mason.nvim",
+			opts = {},
+		},
 		--- completion
 		{
 			"hrsh7th/nvim-cmp",
@@ -153,16 +131,16 @@ require("lazy").setup({
 				{
 					"L3MON4D3/LuaSnip",
 					version = "v2.*",
-					-- install jsregexp (optional!).
 					build = "make install_jsregexp",
 				},
 				"rafamadriz/friendly-snippets",
 				"onsails/lspkind.nvim", -- vs-code like pictograms
 			},
+			-- lazy = false,
 			config = function()
 				local cmp = require("cmp")
 				local lspkind = require("lspkind")
-				local lusnip = require("luasnip")
+				local luasnip = require("luasnip")
 
 				require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -197,41 +175,6 @@ require("lazy").setup({
 			end,
 		},
 
-		---- Mason
-		{
-			"williamboman/mason.nvim",
-			dependencies = {
-				"williamboman/mason-lspconfig.nvim",
-				"WhoIsSethDaniel/mason-tool-installer.nvim",
-			},
-			config = function()
-				require("mason").setup()
-
-				require("mason-lspconfig").setup({
-					automatic_installation = true,
-					ensure_installed = {
-						"cssls",
-						"eslint",
-						"html",
-						"jsonls",
-						"pyright",
-						"tailwindcss",
-					},
-				})
-
-				require("mason-tool-installer").setup({
-					ensure_installed = {
-						"prettier",
-						"stylua", -- lua formatter
-						"isort", -- python formatter
-						"black", -- python formatter
-						"pylint",
-						"eslint_d",
-					},
-				})
-			end,
-		},
-
 		--- LSPConfig
 		{
 			"neovim/nvim-lspconfig",
@@ -242,10 +185,10 @@ require("lazy").setup({
 				"williamboman/mason-lspconfig.nvim",
 				{ "folke/neodev.nvim", opts = {} },
 			},
+			-- lazy = false,
 			config = function()
 				local lspconfig = require("lspconfig")
 				local mason_lspconfig = require("mason-lspconfig")
-
 				local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 				-- Setup diagnostics
@@ -256,12 +199,6 @@ require("lazy").setup({
 					update_in_insert = false,
 					severity_sort = true,
 				})
-
-				-- Global diagnostics keymaps
-				vim.keymap.set("n", "<space>d", vim.diagnostic.open_float)
-				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-				vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-				vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
 				-- On attach function for setting up buffer-local keymaps
 				local on_attach = function(client, bufnr)
@@ -275,6 +212,11 @@ require("lazy").setup({
 					vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
 					vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+					-- Global diagnostics keymaps
+					vim.keymap.set("n", "<space>d", vim.diagnostic.open_float)
+					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+					vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+					vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
 					-- Format on save
 					if client.server_capabilities.documentFormattingProvider then
@@ -287,8 +229,10 @@ require("lazy").setup({
 						})
 					end
 				end
-
-				mason_lspconfig.setup()
+				lspconfig["ts_ls"].setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+				})
 			end,
 		},
 
@@ -309,7 +253,6 @@ require("lazy").setup({
 						html = { "prettier" },
 						json = { "prettier" },
 						yaml = { "prettier" },
-						markdown = { "prettier" },
 						lua = { "stylua" },
 						python = { "isort", "black" },
 					},
@@ -453,9 +396,30 @@ require("lazy").setup({
 				},
 			},
 		},
+
+		--- Obsidian
+		{
+			"epwalsh/obsidian.nvim",
+			version = "*", -- recommended, use latest release instead of latest commit
+			lazy = true,
+			ft = "markdown",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+			},
+			keys = {
+				{ "<leader>b", "<cmd>ObsidianBacklinks<CR>", desc = "Open backlinks" },
+				{ "<leader>o", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open Obsidian Quick Switch" },
+			},
+			opts = {
+				workspaces = {
+					{
+						name = "ARGUS",
+						path = "/Users/walruii/Library/Mobile Documents/iCloud~md~obsidian/Documents/ARGUS",
+					},
+				},
+			},
+		},
 	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
-	-- automatically check for plugin updates
+
 	checker = { enabled = true },
 })

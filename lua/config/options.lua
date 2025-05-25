@@ -1,7 +1,7 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-vim.opt.backspace = '2'
+vim.opt.backspace = "2"
 vim.opt.showcmd = true
 vim.opt.laststatus = 2
 vim.opt.autowrite = true
@@ -25,3 +25,4 @@ vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.o.guicursor = ""
 
+vim.opt.conceallevel = 2
