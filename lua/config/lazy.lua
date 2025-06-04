@@ -109,7 +109,7 @@ require("lazy").setup({
 				vim.keymap.set("n", "<leader>o", function()
 					require("telescope.builtin").find_files({ cwd = vim.loop.cwd() })
 				end, { desc = "Telescope find files (CWD)" })
-				vim.keymap.set("n", "<leader>o", builtin.find_files, { desc = "Telescope find files" })
+				vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 				vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 				vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 				vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
@@ -229,6 +229,32 @@ require("lazy").setup({
 						})
 					end
 				end
+				lspconfig["tailwindcss"].setup({
+					capabilities = capabilities,
+					on_attach = on_attach,
+					filetypes = {
+						"html",
+						"css",
+						"scss",
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+					},
+					init_options = {
+						userLanguages = {
+							typescript = "javascript",
+							typescriptreact = "javascript",
+						},
+					},
+					root_dir = lspconfig.util.root_pattern(
+						"tailwind.config.js",
+						"tailwind.config.ts",
+						"postcss.config.js",
+						"package.json"
+					),
+				})
+
 				lspconfig["ts_ls"].setup({
 					capabilities = capabilities,
 					on_attach = on_attach,
@@ -401,14 +427,15 @@ require("lazy").setup({
 		{
 			"epwalsh/obsidian.nvim",
 			version = "*", -- recommended, use latest release instead of latest commit
-			lazy = true,
+			lazy = false,
 			ft = "markdown",
 			dependencies = {
 				"nvim-lua/plenary.nvim",
 			},
 			keys = {
-				{ "<leader>b", "<cmd>ObsidianBacklinks<CR>", desc = "Open backlinks" },
-				{ "<leader>o", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open Obsidian Quick Switch" },
+				{ "<leader>ob", "<cmd>ObsidianBacklinks<CR>", desc = "Open backlinks" },
+				{ "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open Obsidian Quick Switch" },
+				{ "<leader>od", "<cmd>ObsidianDailies<CR>", desc = "Dailies" },
 			},
 			opts = {
 				workspaces = {
@@ -417,6 +444,9 @@ require("lazy").setup({
 						path = "/Users/walruii/Library/Mobile Documents/iCloud~md~obsidian/Documents/ARGUS",
 					},
 				},
+				note_id_func = function(title)
+					return title
+				end,
 			},
 		},
 	},

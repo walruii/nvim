@@ -8,6 +8,7 @@ vim.opt.autowrite = true
 vim.opt.autoread = true
 vim.opt.termguicolors = true
 vim.wo.wrap = false
+vim.opt.linebreak = true
 vim.o.signcolumn = "yes"
 
 vim.opt.swapfile = false
