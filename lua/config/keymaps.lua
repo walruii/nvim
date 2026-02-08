@@ -37,17 +37,3 @@ vim.keymap.set("n", "<leader>t", ":Oil<CR>")
 vim.keymap.set("n", "<leader>w", function()
 	vim.wo.wrap = not vim.wo.wrap
 end, { desc = "Toggle line wrap" })
-
--- Keymaps for Copilot
-local copilot_enabled = true
-vim.keymap.set("n", "<leader>zd", function()
-	if copilot_enabled then
-		vim.cmd("Copilot disable")
-		copilot_enabled = false
-		vim.notify("Copilot disabled", vim.log.levels.INFO)
-	else
-		vim.cmd("Copilot enable")
-		copilot_enabled = true
-		vim.notify("Copilot enabled", vim.log.levels.INFO)
-	end
-end, { desc = "Toggle Copilot" })
